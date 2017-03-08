@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - base
+    # - dotfiles
+    - vimfiles
+    # - ruby
+    - nodejs
+    - python
+    # - docker

@@ -1,0 +1,46 @@
+---
+
+brew_install_cmd: "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+brew_bin: "/usr/local/bin/brew"
+brew_cask_bin: "/usr/local/bin/brew-cask"
+brew_base_packages:
+  - name: automake
+  - name: certbot
+  - name: cmake
+  - name: coreutils
+  - name: curl
+  - name: findutils
+  - name: fontconfig
+  - name: freetype
+  - name: fswatch
+  - name: gettext
+    install_options: "with-gettext,with-pcre,with-persistent-https,with-blk-sha1"
+  - name: git-extras
+  - name: git-lfs
+  - name: git-secrets
+  - name: gnu-sed
+  - name: gnu-tar
+  - name: libevent
+  - name: libffi
+  - name: libidn
+  - name: libmemcached
+  - name: libmpc
+  - name: libpng
+  - name: libxml2
+  - name: libyaml
+  - name: lorem
+  - name: makedepend
+  - name: moreutils
+  - name: postgresql
+  - name: readline
+  - name: redis
+  - name: sqlite
+  - name: wget
+brew_cask_applications:
+  - name: caffeine
+  - name: flux
+  - name: java
+  - name: spotify
+  - name: vagrant
+  - name: virtualbox
+  - name: vlc

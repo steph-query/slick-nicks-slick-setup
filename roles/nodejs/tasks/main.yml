@@ -1,0 +1,21 @@
+---
+
+- name: make user bin dir
+  file:
+    path: "{{ home_dir }}/bin"
+    state: directory
+
+- name: Nvm setup script
+  template:
+    src: nvm-setup.j2
+    dest: "{{ home_dir }}/bin/setup-nvm"
+    mode: 0755
+  tags:
+    - nodejs
+    - nvm
+
+- name: Run nvm setup script
+  command: "{{ home_dir }}/bin/setup-nvm"
+  tags:
+    - nodejs
+    - nvm

@@ -1,0 +1,34 @@
+---
+
+- name: Install brew packages
+  homebrew:
+    name: "{{ item.name }}"
+    install_options: "{{ item.install_options | default('') }}"
+    state: latest
+  with_items: "{{ python_brew_packages }}"
+  tags:
+    - python
+    - brew
+
+
+- name: Upgrade pip
+  command: "pip install --upgrade pip"
+  tags:
+    - python
+
+- name: Install system python packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  become_method: sudo
+  with_items: "{{ python_packages }}"
+  tags:
+    - python
+
+- name: Install python versions via pyenv
+  shell: "if [ ! `pyenv versions | grep {{ item }}` ]; then {{ python_pyenv_install_cmd }} {{ item }}; fi"
+  with_items: "{{ python_pyenv_versions }}"
+  when: python_use_pyenv
+  tags:
+    - python
