@@ -2,11 +2,6 @@
 
 - name: Update homebrew
   command: "brew update"
-  tags:
-    - base
-    - brew
-    - brew-cask
-    - update
 
 - name: Install base homebrew packages
   homebrew:
@@ -56,23 +51,3 @@
     - brew
     - brew-cask
 
-- name: ssh dir
-  file:
-    path: "{{ home_dir }}/.ssh"
-    state: directory
-  tags:
-    - base
-
-- name: Project workspace
-  file:
-    path: "{{ workspace_dir }}"
-    state: directory
-  tags:
-    - base
-
-- name: User tmp dir
-  file:
-    path: "{{ home_dir }}/tmp"
-    state: directory
-  tags:
-    - base

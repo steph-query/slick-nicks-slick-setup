@@ -38,9 +38,6 @@ brew_base_packages:
   - name: wget
 brew_cask_applications:
   - name: caffeine
-  - name: flux
   - name: java
   - name: spotify
-  - name: vagrant
-  - name: virtualbox
   - name: vlc

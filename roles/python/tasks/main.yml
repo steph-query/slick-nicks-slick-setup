@@ -1,34 +1,39 @@
 ---
 
-- name: Install brew packages
-  homebrew:
-    name: "{{ item.name }}"
-    install_options: "{{ item.install_options | default('') }}"
-    state: latest
-  with_items: "{{ python_brew_packages }}"
-  tags:
-    - python
-    - brew
+- name: install pyenv
+  homebrew: name=pyenv
 
+- name: Install virtualenv
+  homebrew: name={{ item }} state=present
+  with_items:
+    - pyenv-virtualenv
+    - pyenv-virtualenvwrapper
 
-- name: Upgrade pip
-  command: "pip install --upgrade pip"
-  tags:
-    - python
+- name: add pyenv vars to zshrc
+  blockinfile:
+    block: |
+      export PYENV_ROOT="$HOME/.pyenv"
+      export PATH="$PYENV_ROOT/bin:$PATH"
+      if [ command -v pyenv 1>/dev/null 2>&1 ] ; then
+        eval "$(pyenv init -)"
+        pyenv virtualenvwrapper_lazy
+      fi
+      export WORKON_HOME="$HOME/.virtualenvs"
+      export PROJECT_HOME="$HOME/Projects"
+    marker: ### pyenv vars ###
 
 - name: Install system python packages
   pip:
     name: "{{ item }}"
     state: latest
+    extra-args: --user
   become: yes
   become_method: sudo
   with_items: "{{ python_packages }}"
-  tags:
-    - python
 
-- name: Install python versions via pyenv
-  shell: "if [ ! `pyenv versions | grep {{ item }}` ]; then {{ python_pyenv_install_cmd }} {{ item }}; fi"
-  with_items: "{{ python_pyenv_versions }}"
-  when: python_use_pyenv
-  tags:
-    - python
+- name: install pyenv versions
+  command: pyenv install {{ item }}
+  with_items: "{{ pyenv_versions }}"
+
+- name: restart shell with pyenv
+  shell: exec "$SHELL"

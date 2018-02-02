@@ -1,0 +1,6 @@
+---
+
+vimfiles_repo: "git@github.com:nickyj88/nick-vim.git"
+vimfiles_dir: "{{ documents_dir }}/vimfiles"
+neovim_config_dir: "{{ lookup('env', 'HOME') }}/.config/nvim"
+neovim_plugin_dir: "{{ lookup('env', 'HOME') }}/.local/share/nvim/plugged"

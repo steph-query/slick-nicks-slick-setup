@@ -5,9 +5,7 @@
   gather_facts: false
   roles:
     - base
-    # - dotfiles
-    - vimfiles
-    # - ruby
+    - neovim
     - nodejs
     - python
     # - docker

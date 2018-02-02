@@ -1,3 +1,9 @@
 ---
-# python defaults
 
+python_packages:
+  - ipython
+  - jupyter
+  - awscli
+pyenv_versions:
+  - 3.6.3
+pyenv_virtualenv: true

@@ -1,0 +1,40 @@
+---
+
+- name: install neovim
+  homebrew: name=neovim
+
+- name: install neovim python plugin
+  pip:
+    name: neovim
+    state: present
+    extra_args: --user
+
+- name: Make "{{ neovim_config_dir }}/autoload" directory
+  file: path="{{ neovim_config_dir }}/autoload" state=directory
+
+- name: install vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ neovim_config_dir }}/autoload/plug.vim"
+    force: yes
+
+- name: Get vimfiles repo
+  git:
+    repo: "{{ vimfiles_repo }}"
+    dest: "{{ vimfiles_dir }}"
+
+- name: symlink vimrc file
+  file:
+    src: "{{ vimfiles_dir }}/.vim/vimrc"
+    dest: ~/.vimrc
+    state: link
+
+- name: install neovim plugins
+  command: nvim '+silent! PlugInstall!' +qall!
+
+- name: insall rust
+  homebrew: name=rust
+
+- name: set up vim-markdown-preview
+  command: cd {{ neovim_plugin_dir }}/vim-markdown-composer && cargo build --release
+
