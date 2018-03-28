@@ -1,7 +1,6 @@
 ---
 
-- name: install neovim
-  homebrew: name=neovim
+- include: "install_{{ ansible_os_family }}.yml"
 
 - name: install neovim python plugin
   pip:
@@ -18,23 +17,12 @@
     dest: "{{ neovim_config_dir }}/autoload/plug.vim"
     force: yes
 
-- name: Get vimfiles repo
-  git:
-    repo: "{{ vimfiles_repo }}"
-    dest: "{{ vimfiles_dir }}"
-
 - name: symlink vimrc file
   file:
-    src: "{{ vimfiles_dir }}/.vim/vimrc"
+    src: files/init.vim
     dest: ~/.vimrc
     state: link
 
 - name: install neovim plugins
   command: nvim '+silent! PlugInstall!' +qall!
-
-- name: insall rust
-  homebrew: name=rust
-
-- name: set up vim-markdown-preview
-  command: cd {{ neovim_plugin_dir }}/vim-markdown-composer && cargo build --release
 

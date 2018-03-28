@@ -4,17 +4,6 @@ brew_install_cmd: "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Home
 brew_bin: "/usr/local/bin/brew"
 brew_cask_bin: "/usr/local/bin/brew-cask"
 brew_base_packages:
-  - name: automake
-  - name: certbot
-  - name: cmake
-  - name: coreutils
-  - name: curl
-  - name: findutils
-  - name: fontconfig
-  - name: freetype
-  - name: fswatch
-  - name: gettext
-    install_options: "with-gettext,with-pcre,with-persistent-https,with-blk-sha1"
   - name: git-extras
   - name: git-lfs
   - name: git-secrets

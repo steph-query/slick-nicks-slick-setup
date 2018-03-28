@@ -1,0 +1,5 @@
+---
+
+- name: install neovim
+  apt: name=neovim
+

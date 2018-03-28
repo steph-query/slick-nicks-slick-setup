@@ -1,0 +1,9 @@
+---
+
+- name: set up local
+  hosts: localhost
+  roles:
+    - env
+    - python
+    - neovim
+    - nodejs

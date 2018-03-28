@@ -1,0 +1,48 @@
+---
+
+- name: Update homebrew
+  command: "brew update"
+  tags:
+    - darwin
+    - brew
+
+- name: Install base homebrew packages
+  homebrew:
+    name: "{{ item.name }}"
+    install_options: "{{ item.install_options | default('') }}"
+    state: latest
+    with_items: "{{ brew_base_packages }}"
+  tags:
+    - darwin
+    - brew
+
+# TODO: Put this in when on 2.2 which is broken right now
+- name: Install brew cask applications
+  homebrew_cask:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  install_options: "{{item.install_options | default('') }}"
+  with_items: "{{ brew_cask_applications }}"
+  tags:
+    - darwin
+    - brew
+
+- name: Cleanup homebrew
+  command: "brew cleanup -s"
+  ignore_errors: True
+  tags:
+    - darwin
+    - brew
+
+- name: Cleanup cask
+  command: "brew cask cleanup"
+  ignore_errors: True
+  tags:
+    - darwin
+    - brew
+
+- name: Link homebrew apps
+  command: "brew linkapps"
+  tags:
+    - darwin
+    - brew

@@ -27,9 +27,10 @@ nodejs_versions_to_remove:
   - "5.12.0"
   - "6.5.0"
 nodejs_npm_packages:
+  - serverless
+  - create-react-app
   - eslint
   - jshint
   - jsxhint
   - webpack
-  - create-react-app
   - craftool

@@ -1,13 +1,6 @@
 ---
 
-- name: install pyenv
-  homebrew: name=pyenv
-
-- name: Install virtualenv
-  homebrew: name={{ item }} state=present
-  with_items:
-    - pyenv-virtualenv
-    - pyenv-virtualenvwrapper
+- include: "install_pyenv_{{ ansible_os_family }}.yml"
 
 - name: add pyenv vars to zshrc
   blockinfile:
@@ -19,7 +12,7 @@
         pyenv virtualenvwrapper_lazy
       fi
       export WORKON_HOME="$HOME/.virtualenvs"
-      export PROJECT_HOME="$HOME/Projects"
+      export PROJECT_HOME="$HOME/projects"
     marker: ### pyenv vars ###
 
 - name: Install system python packages
