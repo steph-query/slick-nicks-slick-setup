@@ -1,6 +1,7 @@
 ---
 
-vimfiles_repo: "git@github.com:nickyj88/nick-vim.git"
-vimfiles_dir: "{{ documents_dir }}/vimfiles"
+dotfiles_repo: "git@github.com:steph-query/nick-dots.git"
+dotfiles_dir: "{{ workspace_dir }}/nick-dots"
+git_ssh_key: "{{ home_dir }}/.ssh/github"
 neovim_config_dir: "{{ lookup('env', 'HOME') }}/.config/nvim"
 neovim_plugin_dir: "{{ lookup('env', 'HOME') }}/.local/share/nvim/plugged"

@@ -11,12 +11,27 @@
     dest: "{{ neovim_config_dir }}/autoload/plug.vim"
     force: yes
 
+- name: git clone dotfiles
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dir }}"
+    key_file: "{{ git_ssh_key }}"
+
 - name: symlink vimrc file
   file:
-    src: files/init.vim
-    dest: ~/.vimrc
+    src: "{{ dotfiles_dir }}/init.vim"
+    dest: "{{ item }}"
+    force: yes
     state: link
+  with_items:
+    - "{{ neovim_config_dir }}/init.vim"
+    - "{{ home_dir }}/.vimrc"
 
 - name: install neovim plugins
   command: nvim '+silent! PlugInstall!' +qall!
+
+- name: add vimrc alias for easy config editing
+  lineinfile:
+    dest: "{{ home_dir }}/.zshrc"
+    line: 'alias vimrc="nvim {{ dotfiles_dir }}/init.vim"'
 
