@@ -2,6 +2,7 @@
 
 - name: set up local
   hosts: localhost
+  connection: local
   roles:
     - env
     - python

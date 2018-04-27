@@ -6,23 +6,30 @@
     - darwin
     - brew
 
-- name: Install base homebrew packages
-  homebrew:
-    name: "{{ item.name }}"
-    install_options: "{{ item.install_options | default('') }}"
-    state: latest
-    with_items: "{{ brew_base_packages }}"
+- name: add brew taps
+  debug: msg="adding brew tap {{ item }}"
+  homebrew_tap: tap={{ item }} state="{{ item.state | default('present') }}"
+  with_items: "{{ brew_taps }}"
   tags:
     - darwin
     - brew
 
-# TODO: Put this in when on 2.2 which is broken right now
+- name: Install base homebrew packages
+  homebrew:
+    name: "{{ item }}"
+    install_options: ''
+    state: latest
+    with_items: "{{ brew_packages }}"
+  tags:
+    - darwin
+    - brew
+
 - name: Install brew cask applications
   homebrew_cask:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
   install_options: "{{item.install_options | default('') }}"
-  with_items: "{{ brew_cask_applications }}"
+  with_items: "{{ cask_bins }}"
   tags:
     - darwin
     - brew
@@ -46,3 +53,4 @@
   tags:
     - darwin
     - brew
+

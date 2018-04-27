@@ -3,30 +3,106 @@
 brew_install_cmd: "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
 brew_bin: "/usr/local/bin/brew"
 brew_cask_bin: "/usr/local/bin/brew-cask"
-brew_base_packages:
-  - name: git-extras
-  - name: git-lfs
-  - name: git-secrets
-  - name: gnu-sed
-  - name: gnu-tar
-  - name: libevent
-  - name: libffi
-  - name: libidn
-  - name: libmemcached
-  - name: libmpc
-  - name: libpng
-  - name: libxml2
-  - name: libyaml
-  - name: lorem
-  - name: makedepend
-  - name: moreutils
-  - name: postgresql
-  - name: readline
-  - name: redis
-  - name: sqlite
-  - name: wget
+
+brew_taps:
+ - caskroom/cask
+ - caskroom/versions
+ - homebrew/core
+
+brew_packages:
+  - thefuck
+  - jq		    # https://stedolan.github.io/jq/
+  - ack		    # https://beyondgrep.com/
+  - git
+  - hss              # https://github.com/six-ddc/hss - Interactive parallel SSH client
+  - nvm		    # https://github.com/creationix/nvm
+  - gpg		    # https://gnupg.org - GNU Pretty Good Privacy
+  - mtr		    # https://www.bitwizard.nl/mtr - traceroute and ping
+  - wrk		    # https://github.com/wg/wrk - Modern HTTP benchmarking tool
+  - bash
+  - cask		    # https://cask.readthedocs.org/
+  - ctop		    # https://bcicen.github.io/ctop - top-like interface for container metrics
+  - htop		    # https://hisham.hm/htop - improved interactive process viewer
+  - less
+  - curl
+  - ruby
+  - node		    # https://nodejs.org - server-side javascript runtime
+  - wget		    # https://www.gnu.org/software/wget - Internet file retriever
+  - tmux		    # https://tmux.github.io - Terminal multiplexer
+  - tree		    # http://mama.indstate.edu/users/ice/tree - Directory hierarchy as trees
+  - grip             # https://github.com/joeyespo/grip
+  - rsync	    # https://rsync.samba.org - fast incremental file transfer
+  - unrar
+  - rbenv	    # https://github.com/rbenv/rbenv#readme
+  - xhyve	    # https://github.com/mist64/xhyve
+  - socat	    # http://www.dest-unreach.org/socat/
+  - vault	    # https://vaultproject.io - Secures, stores, and tightly controls access to secrets
+  - awscli	    # https://aws.amazon.com/cli/
+  - sysdig           # https://www.sysdig.org/
+  - packer	    # https://packer.io - tool for creating machine images
+  - bashdb	    # https://bashdb.sourceforge.io
+  - httpie	    # https://httpie.org - cmdline HTTP client with JSON support, UI, syntax highlighting
+  - docker	    # https://www.docker.com - lightweight container
+  - netcat	    # https://netcat.sourceforge.io - network connection utility
+  - python	    # Change ^^ only if you truly understand what this means and that's your intent
+  - httpflow	    # https://github.com/six-ddc/httpflow - packet capture and analysis tool ala tcpdump
+  - highlight	    # http://www.andre-simon.de/doku/highlight/en/highlight.html - source code syntax highlighting
+  - colordiff	    # https://www.colordiff.org
+  - ruby-build	    # https://github.com/rbenv/ruby-build
+  - shellcheck	    # https://www.shellcheck.net - find bugs in your shell script
+  - git-extras
+  - git-lfs
+  - git-secrets	    # https://github.com/awslabs/git-secrets
+  - lastpass-cli     # https://github.com/lastpass/lastpass-cli
+  - ansible-lint	    # https://github.com/willthames/ansible-lint
+  - kubernetes-cli   # https://kubernetes.io/
+  - container-diff   # https://github.com/GoogleCloudPlatform/container-diff
+  - docker-machine   # https://docs.docker.com/machine
+  - docker-compose   # https://docs.docker.com/compose
+  - bash-git-prompt  # https://github.com/magicmonty/bash-git-prompt
+  - pyenv-virtualenvwrapper # https://github.com/yyuu/pyenv-virtualenvwrapper
+  - docker-machine-driver-xhyve	# https://github.com/zchee/docker-machine-driver-xhyve
+  - gnu-sed
+  - gnu-tar
+  - libevent
+  - libffi
+  - libidn
+  - libmemcached
+  - libmpc
+  - libpng
+  - libxml2
+  - libyaml
+  - lorem
+  - makedepend
+  - moreutils
+  - openssl
+  - postgresql
+  - readline
+  - redis
+  - sqlite
+
 brew_cask_applications:
-  - name: caffeine
-  - name: java
-  - name: spotify
-  - name: vlc
+
+cask_bins:
+  - iterm2           # https://www.iterm2.com/
+  - hipchat          # https://www.hipchat.com/
+  - slack
+  - caffeine
+  - dashlane
+  - java
+  - spotify
+  - vlc
+  - docker	    # https://www.docker.com/community-edition
+  - vagrant          # https://www.vagrantup.com/
+  - lastpass	    # https://www.lastpass.com/
+  - minikube	    # https://github.com/kubernetes/minikube
+  - aws-vault        # https://github.com/99designs/aws-vault
+  - sequel-pro	    # https://www.sequelpro.com
+  - virtualbox       # https://www.virtualbox.org
+  - tunnelblick      # https://www.tunnelblick.net - GUI for OpenVPN
+  - vlc		    # https://www.videolan.org/vlc/
+  - firefox
+  - macdown	    # https://macdown.uranusjr.com - open source markdown editor for mac
+  - cyberduck	    # https://cyberduck.io
+  - moom
+  - google-chrome

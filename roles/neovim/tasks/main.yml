@@ -2,12 +2,6 @@
 
 - include: "install_{{ ansible_os_family }}.yml"
 
-- name: install neovim python plugin
-  pip:
-    name: neovim
-    state: present
-    extra_args: --user
-
 - name: Make "{{ neovim_config_dir }}/autoload" directory
   file: path="{{ neovim_config_dir }}/autoload" state=directory
 

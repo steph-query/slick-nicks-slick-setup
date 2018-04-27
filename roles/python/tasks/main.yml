@@ -4,29 +4,35 @@
 
 - name: add pyenv vars to zshrc
   blockinfile:
+    path: "{{ home_dir }}/.zshrc"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
-      export PATH="$PYENV_ROOT/bin:$PATH"
-      if [ command -v pyenv 1>/dev/null 2>&1 ] ; then
-        eval "$(pyenv init -)"
-        pyenv virtualenvwrapper_lazy
-      fi
+      eval "$(pyenv init -)"
+      pyenv virtualenvwrapper_lazy
       export WORKON_HOME="$HOME/.virtualenvs"
-      export PROJECT_HOME="$HOME/projects"
-    marker: ### pyenv vars ###
-
-- name: Install system python packages
-  pip:
-    name: "{{ item }}"
-    state: latest
-    extra-args: --user
-  become: yes
-  become_method: sudo
-  with_items: "{{ python_packages }}"
+      export PROJECT_HOME="$HOME/Projects"
+    marker: "### {mark} pyenv vars ###"
 
 - name: install pyenv versions
-  command: pyenv install {{ item }}
+  shell: pyenv install {{ item }}
   with_items: "{{ pyenv_versions }}"
+  ignore_errors: true
+
+- name: source pyenv into environment
+  shell: eval {{ item }}
+  with_items:
+    - "$(pyenv init -)"
+    - "$(pyenv virtualenvwrapper_lazy)"
+  ignore_errors: true
+
+- name: set up pyenv virtualenvs
+  shell: pyenv virtualenv {{ item.version }} {{ item.name }}; pyenv activate {{ item.name }}; {{ item.commands|join('; ') }}; pyenv deactivate
+  with_items: "{{ virtualenvs }}"
+  ignore_errors: true
+
+- name: set pyenv globals
+  shell: pyenv global {{ (pyenv_versions + virtualenvs|map(attribute='name')|list)|join(' ') }}
 
 - name: restart shell with pyenv
   shell: exec "$SHELL"
+

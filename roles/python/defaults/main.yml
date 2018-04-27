@@ -1,9 +1,33 @@
 ---
 
+virtualenvs:
+  - name: jupyter3
+    version: "{{ default_python3 }}"
+    commands:
+      - pip install jupyter
+      - python -m ipykernel install --user
+  - name: ipython2
+    version: "{{ default_python2 }}"
+    commands:
+      - pip install ipykernel
+      - python -m ipykernel install --user
+  - name: neovim3
+    version: "{{ default_python3 }}"
+    commands:
+      - pip install neovim
+  - name: neovim2
+    version: "{{ default_python2 }}"
+    commands:
+      - pip install neovim
+
 python_packages:
   - ipython
   - jupyter
   - awscli
+
 pyenv_versions:
-  - 3.6.3
-pyenv_virtualenv: true
+  - 3.6.5
+  - 2.7.14
+
+default_python3: 3.6.5
+default_python2: 2.7.14
